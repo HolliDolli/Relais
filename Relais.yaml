@@ -1,0 +1,40 @@
+esphome:
+  name: relais
+esp8266:
+  board: esp01_1m
+  early_pin_init: false
+  
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+#
+# Achtung: Für Offlinekalender muss der API-Reboot auf 0s gesetzt werden, da die Tonne sonst alle 15 Minuten neu startet.
+#
+api:
+  password: ""
+ #  reboot_timeout: 0s  # only enable this when creating an offline Wastebin
+
+ota:
+  password: ""
+
+wifi:
+  ssid: !secret GKssid
+#  for captive-portal remove password
+  password: !secret GKpassword
+  ap:
+    ssid: !secret FBssid
+    password: !secret FBpassword
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+captive_portal:
+#  keep_user_credentials: true  # option nicht aktiv.
+
+# i2c Bus auf D1 und D2 konfigurieren
+
+switch:
+  - platform: gpio
+    pin: GPIO0
+    inverted: true
+    name: relais
+    restore_mode: RESTORE_DEFAULT_OFF
